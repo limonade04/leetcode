@@ -25,16 +25,20 @@ s consists of parentheses only '()[]{}'.
 */ 
 
 var isValid = function(s) {
-    let current = s[0]
-    let next 
+    let stack = [] 
 
-    for(let i=1; i<s.length; i+=2){
-        next = s[i]
-        if(current == "(" && next == ")" || current == "[" && next == "]" || current == "{" && next == "}"){
-            currrent = s[i+1] 
-        }else{
-            return false 
+    for(let char of s){
+        if(char == '(' || char == '[' || char == '{'){
+            stack.push(char)
+        } else {
+            if (!stack.length || 
+                (c == ')' && stack[stack.length-1] != '(') || 
+                (c == ']' && stack[stack.length-1] != '[') || 
+                (c == '}' && stack[stack.length-1] != '{')){
+                    return false 
+                }
+                stack.pop()
         }
-        return true 
     }
+    return !stack.length
 };
